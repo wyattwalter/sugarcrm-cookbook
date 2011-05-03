@@ -44,3 +44,9 @@ template "config_si.php" do
   owner "#{node[:apache][:user]}"
   group "#{node[:apache][:group]}"
 end
+
+cron "sugarcron" do
+  minute "*/2"
+  command "/usr/bin/php -f #{node[:sugarcrm][:webroot]}/cron.php >> /dev/null"
+  user "#{node[:apache][:user]}"
+end
