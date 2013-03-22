@@ -44,3 +44,10 @@ cron "sugarcron" do
   command "/usr/bin/php -f #{node[:sugarcrm][:webroot]}/cron.php >> /dev/null"
   user "#{node[:apache][:user]}"
 end
+
+web_app "sugarcrm" do
+  server_name node['hostname']
+  server_aliases node['fqdn'], node['host_name']
+  docroot "#{node[:sugarcrm][:webroot]}"
+  notifies :restart, "service[apache2]", :immediately
+end
