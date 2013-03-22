@@ -17,12 +17,6 @@
 # limitations under the License.
 #
 
-
-include_recipe "apache2"
-include_recipe %w{php::php5 php::module_mysql}
-include_recipe "git"
-include_recipe "mysql::server"
-
 directory "#{node[:sugarcrm][:webroot]}" do
   owner "#{node[:apache][:user]}"
   group "#{node[:apache][:group]}"
