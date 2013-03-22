@@ -2,3 +2,4 @@ examples/cookbooks
 examples/.librarian
 examples/tmp
 examples/Cheffile.lock
+examples/.vagrant
