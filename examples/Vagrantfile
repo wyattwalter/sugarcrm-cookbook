@@ -11,6 +11,7 @@ Vagrant::Config.run do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "cookbooks"
-    chef.add_recipe = "sugarcrm-cookbooks"    
+    chef.roles_path = "roles"
+    chef.add_role("sugarcrm")    
   end
 end

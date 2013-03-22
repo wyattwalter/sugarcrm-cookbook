@@ -1,0 +1,44 @@
+{
+  "name": "sugarcrm",
+  "description": "SugarCRM Install",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "chef_client": {
+      "init_style": "init"
+    },
+    "mysql": {
+      "server_root_password": "sugarcrm",
+      "server_debian_password": "sugarcrm",
+      "server_repl_password": "sugarcrm",
+      "client": { 
+        "packages": [ "build-essential","mysql-client","libmysqlclient-dev"]
+      }      
+    },
+    "sugarcrm": { }
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[apt]",
+    "recipe[build-essential]",
+    "recipe[hostname]",
+    "recipe[git]",
+    "recipe[vim]",
+    "recipe[mysql::server]",
+    "recipe[mysql::ruby]",
+    "recipe[php]",
+    "recipe[php::module_mysql]",
+    "recipe[php::module_gd]",
+    "recipe[php::module_curl]",
+    "recipe[apache2]",
+    "recipe[apache2::mod_php5]",
+    "recipe[sugarcrm]"
+  ],
+  "env_run_lists": {
+    "dev": [
+    ],
+    "prod": [
+    ]
+  }
+}

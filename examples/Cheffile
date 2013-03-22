@@ -12,6 +12,8 @@ cookbook "mysql"
 cookbook "openssl"
 cookbook "php"
 cookbook "runit"
+cookbook "sugarcrm",
+  :git => "https://github.com/phumpal/sugarcrm-cookbook.git"
 cookbook "vim"
 cookbook "windows"
 cookbook "xfs"
