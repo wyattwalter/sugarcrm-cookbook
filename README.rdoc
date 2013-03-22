@@ -34,6 +34,15 @@ Just add the recipe to your node or role and let Chef do the rest.
 
 You can login to application using 'admin' username and password to create additional users. Default admin user's password can be overridden at the role or node level.
 
+== Vagrant usage
+
+```
+git clone git://github.com/phumpal/sugarcrm-cookbook.git sugarcrm
+cd sugarcrm/examples
+librarian-chef install --path ./cookbooks
+vagrant up
+```
+
 
 = LICENSE and AUTHOR:
       
