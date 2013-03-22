@@ -24,7 +24,7 @@ default[:sugarcrm][:db][:user] = 'sugarcrm'
 default[:sugarcrm][:dir] = 'sugarcrm'
 default[:sugarcrm][:admin_pass] = 'admin'
 
-default[:sugarcrm][:webroot] = "/var/www/#{node[:sugarcrm][:dir]}"
+default[:sugarcrm][:webroot] = "/var/www/#{default[:sugarcrm][:dir]}"
 
 ::Chef::Node.send(:include, Opscode::OpenSSL::Password)
 
