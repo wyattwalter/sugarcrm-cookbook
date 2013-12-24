@@ -24,10 +24,6 @@ default[:sugarcrm][:db][:user] = 'sugarcrm'
 default[:sugarcrm][:dir] = 'sugarcrm'
 default[:sugarcrm][:admin_pass] = 'admin'
 
-puts "HASD"*20
-p node[ :apache ]
-
-
 set[:sugarcrm][:webroot] = "#{node[:apache][:docroot_dir]}/#{node[:sugarcrm][:dir]}"
 
 ::Chef::Node.send(:include, Opscode::OpenSSL::Password)
