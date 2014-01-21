@@ -50,3 +50,7 @@ cron "sugarcron" do
   command "/usr/bin/php -f #{node[:sugarcrm][:webroot]}/cron.php >> /dev/null"
   user "#{node[:apache][:user]}"
 end
+
+file "#{node[:apache][:docroot_dir]}/index.html" do
+  content "<body><head><meta http-equiv=\"refresh\" content=\"0; url=/#{node[:sugarcrm][:dir]}\" /></head></body>"
+end
