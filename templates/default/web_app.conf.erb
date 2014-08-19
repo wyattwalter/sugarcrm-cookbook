@@ -1,10 +1,10 @@
 <VirtualHost *:80>
   ServerName <%= node['hostname'] %>
   ServerAlias <% @params[:server_aliases].each do |a| %><%= a %> <% end %>
-  DocumentRoot <%= node['sugarcrm']['webroot'] %>
+  DocumentRoot <%= node['sugarcrm']['webroot']/current %>
   RewriteEngine On
   
-  <Directory <%= node['sugarcrm']['webroot'] %>>
+  <Directory <%= node['sugarcrm']['webroot']/current %>>
     Options FollowSymLinks
     AllowOverride All
     Order allow,deny
