@@ -18,15 +18,19 @@
 # limitations under the License.
 #
 
+::Chef::Node.send(:include, Opscode::OpenSSL::Password)
+
+ 	
+default[:sugarcrm]['version'] = nil #"6.5.16"
 
 default[:sugarcrm][:db][:hostname] = 'localhost'
 default[:sugarcrm][:db][:name] = 'sugarcrm'
 default[:sugarcrm][:db][:user] = 'sugarcrm'
-default[:sugarcrm][:dir] = 'sugarcrm'
-default[:sugarcrm][:admin_pass] = 'admin'
+default[:sugarcrm][:db][:password] = secure_password
 
+default[:sugarcrm][:admin_pass] = secure_password
+
+default[:sugarcrm][:dir] = 'sugarcrm'
 default[:sugarcrm][:webroot] = "#{node[:apache][:docroot_dir]}/#{node[:sugarcrm][:dir]}"
 
-::Chef::Node.send(:include, Opscode::OpenSSL::Password)
 
-default[:sugarcrm][:db][:password] = secure_password
