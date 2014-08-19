@@ -48,6 +48,10 @@ Recipes
 
 *No recipes defined*
 
+Testing
+-------
+On kitchen testmachines, log in on localhost:4260 with admin:admin
+
 License and Author
 ------------------
 
