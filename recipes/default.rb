@@ -35,7 +35,7 @@ git "#{node[:sugarcrm][:webroot]}" do
   repository "git://github.com/sugarcrm/sugarcrm_dev.git"
   user "#{node[:apache][:user]}"
   group "#{node[:apache][:group]}"
-  reference default[:sugarcrm]['version'] not if default[:sugarcrm]['version'].nil?
+  reference node[:sugarcrm]['version'].nil? ? node[:sugarcrm]['version'] : 'master'
   action :checkout
 end
 

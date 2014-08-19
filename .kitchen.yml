@@ -12,7 +12,7 @@ platforms:
 suites:
   - name: default
     run_list: 
-      - recipe[sugarcrm-ce]
+      - recipe[SugarCRM-CE::default]
     attributes:
       sugarcrm:
         db:
