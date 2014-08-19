@@ -11,5 +11,10 @@ platforms:
 
 suites:
   - name: default
-    run_list:
+    run_list: 
+      - recipe[sugarcrm-ce]
     attributes:
+      sugarcrm:
+        db:
+          password: test
+        admin_pass: test
