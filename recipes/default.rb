@@ -18,11 +18,10 @@
 # limitations under the License.
 #
 
-
-include_recipe "apache2"
-include_recipe %w{php php::module_mysql}
-include_recipe "git"
-include_recipe "mysql::server"
+include_recipe 'apache2'
+include_recipe %w(php php::module_mysql)
+include_recipe 'git'
+include_recipe 'mysql::server'
 
 directory "#{node[:sugarcrm][:webroot]}" do
   owner "#{node[:apache][:user]}"
@@ -32,33 +31,33 @@ directory "#{node[:sugarcrm][:webroot]}" do
 end
 
 git "#{node[:sugarcrm][:webroot]}" do
-  repository "git://github.com/sugarcrm/sugarcrm_dev.git"
+  repository 'git://github.com/sugarcrm/sugarcrm_dev.git'
   user "#{node[:apache][:user]}"
   group "#{node[:apache][:group]}"
   reference node[:sugarcrm]['version'].nil? ? node[:sugarcrm]['version'] : 'master'
   action :checkout
 end
 
-template "config_si.php" do
-  source "config_si.php.erb"
+template 'config_si.php' do
+  source 'config_si.php.erb'
   path "#{node[:sugarcrm][:webroot]}/config_si.php"
   owner "#{node[:apache][:user]}"
   group "#{node[:apache][:group]}"
 end
 
-cron "sugarcron" do
-  minute "*/2"
+cron 'sugarcron' do
+  minute '*/2'
   command "/usr/bin/php -f #{node[:sugarcrm][:webroot]}/cron.php >> /dev/null"
   user "#{node[:apache][:user]}"
 end
 
-web_app "sugarcrm" do
+web_app 'sugarcrm' do
   server_name node['hostname']
   server_aliases node['fqdn'], node['host_name']
   docroot "#{node[:sugarcrm][:webroot]}"
-  notifies :restart, "service[apache2]", :immediately
+  notifies :restart, 'service[apache2]', :immediately
 end
 
-#file "#{node[:apache][:docroot_dir]}/index.html" do
+# file "#{node[:apache][:docroot_dir]}/index.html" do
 #  content "<body><head><meta http-equiv=\"refresh\" #content=\"0; url=/#{node[:sugarcrm][:dir]}\" /></#head></body>"
-#end
+# end

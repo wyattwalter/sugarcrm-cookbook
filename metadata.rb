@@ -6,10 +6,10 @@ description      "Installs/Configures SugarCRM CE"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "0.1.4"
 
-supports "ubuntu"
+supports 'ubuntu'
 
-depends "git"
-depends "mysql"
-depends "database"
-depends "php"
-depends "apache2"
+depends 'git'
+depends 'mysql'
+depends 'database'
+depends 'php'
+depends 'apache2'
