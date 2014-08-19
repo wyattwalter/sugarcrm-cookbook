@@ -23,41 +23,40 @@ include_recipe %w(php php::module_mysql)
 include_recipe 'git'
 include_recipe 'mysql::server'
 
-directory "#{node[:sugarcrm][:webroot]}" do
-  owner "#{node[:apache][:user]}"
-  group "#{node[:apache][:group]}"
-  recursive true
-  action :create
-end
+include_recipe 'SugarCRM-CE::mysql'
 
-git "#{node[:sugarcrm][:webroot]}" do
+
+
+application 'sugarcrm' do
+
+  path node['sugarcrm']['webroot']
+  owner "#{node[:apache]['user']}"
+  group "#{node[:apache]['group']}"
   repository 'git://github.com/sugarcrm/sugarcrm_dev.git'
-  user "#{node[:apache][:user]}"
-  group "#{node[:apache][:group]}"
-  reference node[:sugarcrm]['version'].nil? ? node[:sugarcrm]['version'] : 'master'
-  action :checkout
+  revision node['sugarcrm']['version'].nil? ? node['sugarcrm']['version'] : 'master'
+
+  php do
+    webapp_template 'web_app.conf.erb'
+  end
 end
 
 template 'config_si.php' do
   source 'config_si.php.erb'
-  path "#{node[:sugarcrm][:webroot]}/config_si.php"
-  owner "#{node[:apache][:user]}"
-  group "#{node[:apache][:group]}"
+  path "#{node['sugarcrm']['webroot']}/config_si.php"
+  notifies :restart, 'service[apache2]', :immediately
 end
 
 cron 'sugarcron' do
   minute '*/2'
-  command "/usr/bin/php -f #{node[:sugarcrm][:webroot]}/cron.php >> /dev/null"
-  user "#{node[:apache][:user]}"
+  command "/usr/bin/php -f #{node['sugarcrm']['webroot']}/cron.php >> /dev/null"
+  user "#{node[:apache]['user']}"
 end
 
-web_app 'sugarcrm' do
-  server_name node['hostname']
-  server_aliases node['fqdn'], node['host_name']
-  docroot "#{node[:sugarcrm][:webroot]}"
-  notifies :restart, 'service[apache2]', :immediately
-end
+
+#  server_name node['hostname']
+#  server_aliases node['fqdn'], node['host_name']
+
 
 # file "#{node[:apache][:docroot_dir]}/index.html" do
-#  content "<body><head><meta http-equiv=\"refresh\" #content=\"0; url=/#{node[:sugarcrm][:dir]}\" /></#head></body>"
+#  content "<body><head><meta http-equiv=\"refresh\" #content=\"0; url=/#{node['sugarcrm'][:dir]}\" /></#head></body>"
 # end
