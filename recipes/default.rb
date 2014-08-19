@@ -46,12 +46,6 @@ application 'sugarcrm' do
   end
 end
 
-template 'config_si.php' do
-  source 'config_si.php.erb'
-  path "#{node['sugarcrm']['webroot']}/config_si.php"
-  notifies :restart, 'service[apache2]', :immediately
-end
-
 cron 'sugarcron' do
   minute '*/2'
   command "/usr/bin/php -f #{node['sugarcrm']['webroot']}/cron.php >> /dev/null"
