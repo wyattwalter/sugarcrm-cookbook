@@ -1,5 +1,5 @@
-maintainer       "Wyatt Walter"
-maintainer_email "wwalter@sugarcrm.com"
+maintainer       "Christian Fischer"
+maintainer_email "chef-cookbooks@computerlyrik.de"
 license          "Apache 2.0"
 description      "Installs/Configures SugarCRM CE"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
