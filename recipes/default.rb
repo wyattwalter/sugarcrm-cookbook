@@ -20,8 +20,8 @@
 
 include_recipe 'apache2'
 include_recipe %w(php php::module_mysql)
-include_recipe 'git'
-include_recipe 'mysql::server'
+include_recipe 'application'
+include_recipe 'application_php'
 
 include_recipe 'SugarCRM-CE::mysql'
 
