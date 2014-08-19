@@ -5,7 +5,7 @@ Installs/Configures SugarCRM CE
 
 Source Code is here: https://github.com/computerlyrik/chef-sugarcrm-ce
 
-![https://travis-ci.org/computerlyrik/chef-sugarcrm-ce.svg]
+![Build-status](https://travis-ci.org/computerlyrik/chef-sugarcrm-ce.svg)
 
 
 Disclaimer

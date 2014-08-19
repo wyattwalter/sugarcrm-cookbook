@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'berkshelf'
+gem 'foodcritic'
 
 # Uncomment these lines if you want to live on the Edge:
 #
