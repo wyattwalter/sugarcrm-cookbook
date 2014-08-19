@@ -21,7 +21,7 @@
 include_recipe 'apache2'
 include_recipe %w(php php::module_mysql)
 include_recipe 'application'
-include_recipe 'application_php'
+#include_recipe 'application_php'
 
 include_recipe 'SugarCRM-CE::mysql'
 
@@ -33,10 +33,14 @@ application 'sugarcrm' do
   owner "#{node[:apache]['user']}"
   group "#{node[:apache]['group']}"
   repository 'git://github.com/sugarcrm/sugarcrm_dev.git'
-  revision node['sugarcrm']['version'].nil? ? node['sugarcrm']['version'] : 'master'
+  revision node['sugarcrm']['version'] || 'master'
 
-  php do
+  mod_php_apache2 do
+    server_aliases [node['fqdn'], node['host_name']]
     webapp_template 'web_app.conf.erb'
+  end
+  php do
+    local_settings_file 'config_si.php'
   end
 end
 
@@ -53,8 +57,8 @@ cron 'sugarcron' do
 end
 
 
-#  server_name node['hostname']
-#  server_aliases node['fqdn'], node['host_name']
+#  server_name
+#  
 
 
 # file "#{node[:apache][:docroot_dir]}/index.html" do

@@ -30,4 +30,4 @@ default['sugarcrm']['db']['password'] = secure_password
 default['sugarcrm']['admin_pass'] = secure_password
 
 default['sugarcrm']['dir'] = 'sugarcrm'
-default['sugarcrm']['webroot'] = "#{node[apache][docroot_dir]}/#{node[sugarcrm][dir]}"
+default['sugarcrm']['webroot'] = "#{node['apache']['docroot_dir']}/#{node['sugarcrm']['dir']}"
