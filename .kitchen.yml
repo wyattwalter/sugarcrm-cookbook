@@ -27,4 +27,6 @@ suites:
       sugarcrm:
         db:
           password: test
-        admin_pass: test
+        admin_pass: admin
+      mysql:
+        server_root_password: test
