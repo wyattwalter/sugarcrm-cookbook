@@ -29,14 +29,11 @@ node.set['mysql']['server_root_password'] = secure_password if node['mysql']['se
 include_recipe 'mysql::server'
 
 include_recipe 'php::module_mysql'
-#include_recipe 'sugarcrm-ce::mysql'
 
 node.set_unless['sugarcrm']['db']['password'] = secure_password
 node.set_unless['sugarcrm']['admin_pass'] = secure_password
 
-
 application 'sugarcrm' do
-
   path node['sugarcrm']['webroot']
   owner "#{node[:apache]['user']}"
   group "#{node[:apache]['group']}"
