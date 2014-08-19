@@ -25,7 +25,7 @@ include_recipe 'git'
 include_recipe 'application'
 #include_recipe 'application_php'
 
-include_recipe 'SugarCRM-CE::mysql'
+include_recipe 'sugarcrm-ce::mysql'
 
 
 

@@ -1,4 +1,4 @@
-name             "SugarCRM-CE"
+name             "sugarcrm-ce"
 maintainer       "Christian Fischer"
 maintainer_email "chef-cookbooks@computerlyrik.de"
 license          "Apache 2.0"
