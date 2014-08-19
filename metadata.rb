@@ -8,6 +8,7 @@ version          "0.1.4"
 
 supports 'ubuntu'
 
+depends 'apt'
 depends 'git'
 depends 'mysql'
 depends 'database'

@@ -18,8 +18,10 @@
 # limitations under the License.
 #
 
+include_recipe 'apt'
 include_recipe 'apache2'
-include_recipe %w(php php::module_mysql)
+include_recipe 'git'
+#include_recipe %w(php php::module_mysql)
 include_recipe 'application'
 #include_recipe 'application_php'
 
