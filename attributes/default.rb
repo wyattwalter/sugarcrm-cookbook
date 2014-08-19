@@ -29,3 +29,11 @@ default['sugarcrm']['admin_pass'] = nil
 
 default['sugarcrm']['dir'] = 'sugarcrm'
 default['sugarcrm']['webroot'] = "#{node['apache']['docroot_dir']}/#{node['sugarcrm']['dir']}"
+
+default['sugarcrm']['settings']['currency_iso4217'] = 'USD'
+default['sugarcrm']['settings']['currency_name'] = 'US Dollar'
+default['sugarcrm']['settings']['currency_symbol'] = '$'
+default['sugarcrm']['settings']['date_format'] = 'Y-m-d'
+default['sugarcrm']['settings']['time_format'] = 'H:i'
+default['sugarcrm']['settings']['language'] = 'en_us'
+
