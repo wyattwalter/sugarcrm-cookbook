@@ -8,12 +8,8 @@ version          "0.1.4"
 
 supports "ubuntu"
 
-depends "apt"
-depends "build-essential"
 depends "git"
-depends "hostname"
 depends "mysql"
 depends "database"
 depends "php"
 depends "apache2"
-depends "vim"

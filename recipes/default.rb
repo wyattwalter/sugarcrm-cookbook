@@ -52,15 +52,13 @@ cron "sugarcron" do
   user "#{node[:apache][:user]}"
 end
 
-<<<<<<< HEAD
 web_app "sugarcrm" do
   server_name node['hostname']
   server_aliases node['fqdn'], node['host_name']
   docroot "#{node[:sugarcrm][:webroot]}"
   notifies :restart, "service[apache2]", :immediately
 end
-=======
-file "#{node[:apache][:docroot_dir]}/index.html" do
-  content "<body><head><meta http-equiv=\"refresh\" content=\"0; url=/#{node[:sugarcrm][:dir]}\" /></head></body>"
-end
->>>>>>> 88236e854c1dc15f269162da9200ef6919fa0473
+
+#file "#{node[:apache][:docroot_dir]}/index.html" do
+#  content "<body><head><meta http-equiv=\"refresh\" #content=\"0; url=/#{node[:sugarcrm][:dir]}\" /></#head></body>"
+#end
