@@ -4,4 +4,4 @@ rvm:
 before_script:
   - bundle exec berks install
 script:
-  - bundle exec foodcritic -f any .
+  - bundle exec foodcritic --tags ~FC012 -f any .

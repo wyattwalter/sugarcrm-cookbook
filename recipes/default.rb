@@ -35,8 +35,8 @@ node.set_unless['sugarcrm']['admin_pass'] = secure_password
 
 application 'sugarcrm' do
   path node['sugarcrm']['webroot']
-  owner "#{node[:apache]['user']}"
-  group "#{node[:apache]['group']}"
+  owner node['apache']['user']
+  group node['apache']['group']
   repository 'git://github.com/sugarcrm/sugarcrm_dev.git'
   revision node['sugarcrm']['version'] || 'master'
 
@@ -52,5 +52,5 @@ end
 cron 'sugarcron' do
   minute '*/2'
   command "/usr/bin/php -f #{node['sugarcrm']['webroot']}/cron.php >> /dev/null"
-  user "#{node[:apache]['user']}"
+  user node['apache']['user']
 end

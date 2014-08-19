@@ -1,10 +1,10 @@
 <?php
 
 $sugar_config_si = array(
-'setup_db_host_name' => '<%= node[:sugarcrm][:db][:hostname] %>',
-'setup_db_sugarsales_user' => '<%= node[:sugarcrm][:db][:user] %>',
-'setup_db_sugarsales_password' => '<%= node[:sugarcrm][:db][:password] %>',
-'setup_db_database_name' => '<%= node[:sugarcrm][:db][:name] %>',
+'setup_db_host_name' => '<%= node['sugarcrm']['db']['hostname'] %>',
+'setup_db_sugarsales_user' => '<%= node['sugarcrm']['db']['user'] %>',
+'setup_db_sugarsales_password' => '<%= node['sugarcrm']['db']['password'] %>',
+'setup_db_database_name' => '<%= node['sugarcrm']['db']['name'] %>',
 'setup_db_type' => 'mysql',
 'setup_db_pop_demo_data' => false,
 
@@ -15,12 +15,12 @@ $sugar_config_si = array(
 'setup_db_username_is_privileged' => true,
 
 'setup_db_admin_user_name' => 'root',
-'setup_db_admin_password' => '<%= node[:mysql][:server_root_password]%>',
+'setup_db_admin_password' => '<%= node['mysql']['server_root_password']%>',
 
-<% site_url = node.has_key?("ec2") ? node[:ec2][:public_hostname] : node[:hostname] -%>
-'setup_site_url' => 'http://<%= site_url %>/<%= node[:sugarcrm][:dir] %>',
+<% site_url = node.has_key?('ec2') ? node['ec2']['public_hostname'] : node['hostname'] -%>
+'setup_site_url' => 'http://<%= site_url %>/<%= node['sugarcrm']['dir'] %>',
 'setup_site_admin_user_name'=>'admin',
-'setup_site_admin_password' => '<%= node[:sugarcrm][:admin_pass] %>',
+'setup_site_admin_password' => '<%= node['sugarcrm']['admin_pass'] %>',
 
 'setup_site_sugarbeet_automatic_checks' => true,
 
