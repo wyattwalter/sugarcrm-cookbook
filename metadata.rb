@@ -6,8 +6,9 @@ description      "Installs/Configures SugarCRM CE"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "0.2.3"
 
-supports 'ubuntu'
+supports 'ubuntu', '12.04'
 supports 'debian'
+supports 'centos'
 
 depends 'apt'
 depends 'git'

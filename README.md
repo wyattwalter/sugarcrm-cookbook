@@ -25,7 +25,9 @@ Requirements
 
 ### Platform:
 
-* Ubuntu
+* Ubuntu (= 12.04)
+* Debian
+* Centos
 
 ### Cookbooks:
 
