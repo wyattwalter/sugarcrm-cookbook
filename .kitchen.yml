@@ -1,0 +1,33 @@
+---
+driver:
+  name: vagrant
+  network:
+    forwarded_port:
+      guest: 80
+      host: 4280
+      auto_correct: true
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: centos-6.4
+  - name: ubuntu-12.04 
+  - name: ubuntu-14.04
+    driver_config:
+      box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box
+  - name: debian-7
+    driver_config:
+      box: opscode-debian-7.4
+      box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.4_chef-provisionerless.box
+suites:
+  - name: default
+    run_list: 
+      - recipe[sugarcrm-ce::default]
+    attributes:
+      sugarcrm:
+        db:
+          password: test
+        admin_pass: admin
+      mysql:
+        server_root_password: test

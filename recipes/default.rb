@@ -3,6 +3,7 @@
 # Recipe:: default
 #
 # Copyright 2011, SugarCRM
+# Copyright 2014, computerlyrik
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,37 +17,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
 
+include_recipe 'apt'
+include_recipe 'apache2'
+include_recipe 'git'
+include_recipe 'application'
 
-include_recipe "apache2"
-include_recipe %w{php::php5 php::module_mysql}
-include_recipe "git"
-include_recipe "mysql::server"
+node.set['mysql']['server_root_password'] = secure_password if node['mysql']['server_root_password'] == 'ilikerandompasswords'
 
-directory "#{node[:sugarcrm][:webroot]}" do
-  owner "#{node[:apache][:user]}"
-  group "#{node[:apache][:group]}"
-  recursive true
-  action :create
+include_recipe 'mysql::server'
+
+include_recipe 'php::module_mysql'
+
+node.set_unless['sugarcrm']['db']['password'] = secure_password
+node.set_unless['sugarcrm']['admin_pass'] = secure_password
+
+application 'sugarcrm' do
+  path node['sugarcrm']['webroot']
+  owner node['apache']['user']
+  group node['apache']['group']
+  repository 'git://github.com/sugarcrm/sugarcrm_dev.git'
+  revision node['sugarcrm']['version'] || 'master'
+
+  mod_php_apache2 do
+    server_aliases [node['fqdn'], node['host_name']]
+    webapp_template 'web_app.conf.erb'
+  end
+  php do
+    local_settings_file 'config_si.php'
+  end
 end
 
-git "#{node[:sugarcrm][:webroot]}" do
-  repository "git://github.com/sugarcrm/sugarcrm_dev.git"
-  user "#{node[:apache][:user]}"
-  group "#{node[:apache][:group]}"
-  reference "master"
-  action :checkout
-end
-
-template "config_si.php" do
-  source "config_si.php.erb"
-  path "#{node[:sugarcrm][:webroot]}/config_si.php"
-  owner "#{node[:apache][:user]}"
-  group "#{node[:apache][:group]}"
-end
-
-cron "sugarcron" do
-  minute "*/2"
-  command "/usr/bin/php -f #{node[:sugarcrm][:webroot]}/cron.php >> /dev/null"
-  user "#{node[:apache][:user]}"
+cron 'sugarcron' do
+  minute '*/2'
+  command "/usr/bin/php -f #{node['sugarcrm']['webroot']}/cron.php >> /dev/null"
+  user node['apache']['user']
 end
