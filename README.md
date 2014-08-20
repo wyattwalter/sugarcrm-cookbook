@@ -25,6 +25,9 @@ Requirements
 
 ### Platform:
 
+Ubuntu 14.04 works only with freshest apache2 cookbook from github.
+The fixing commit:  https://github.com/onehealth-cookbooks/apache2/commit/7ebfcee05d9bf1891e2cb6c75a117fd31d9087b3
+
 * Ubuntu (= 12.04)
 * Debian
 * Centos
